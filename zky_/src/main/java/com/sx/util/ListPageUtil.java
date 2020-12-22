@@ -1,0 +1,52 @@
+package com.sx.util;
+
+import cn.hutool.core.collection.CollUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author yayu
+ * @title: pageUtil
+ * @description: TODO ListPageUtil 对集合进行分页
+ * @date 2020/9/2315:36
+ */
+public class ListPageUtil {
+
+    /**
+     * 开始分页
+     *
+     * @param list
+     * @param pageNum  页码
+     * @param pageSize 每页多少条数据
+     * @return
+     */
+    public static List startPage(List list, int pageNum, int pageSize) {
+        if (CollUtil.isEmpty(list)) {
+            return new ArrayList();
+        }
+
+        int count = list.size(); // 记录总数
+        int pageCount = 0; // 页数
+        if (count % pageSize == 0) {
+            pageCount = count / pageSize;
+        } else {
+            pageCount = count / pageSize + 1;
+        }
+
+        int fromIndex = 0; // 开始索引
+        int toIndex = 0; // 结束索引
+
+        if (pageNum != pageCount) {
+            fromIndex = (pageNum - 1) * pageSize;
+            toIndex = fromIndex + pageSize;
+        } else {
+            fromIndex = (pageNum - 1) * pageSize;
+            toIndex = count;
+        }
+
+        List pageList = list.subList(fromIndex, toIndex);
+
+        return pageList;
+    }
+}

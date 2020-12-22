@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LOGITEMS>
+    <ITEM name="zky"
+          console_log="true"
+          file_log="true"
+          file_append="true"
+          file_division="true"
+          file_division_type="size:512k"
+          file_name="zky.log"
+          server_log="false"
+          server_ip=""
+          server_port=""
+          message="true"
+          information="true"
+          warning="true"
+          error="true"
+          error_stack="true"
+          fatal="true"
+          fatal_stack="true"
+          exception="true"
+          exception_stack="true"
+    />
+</LOGITEMS>

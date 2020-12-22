@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- config file for base information database, written by YangXiPing "yangxiping@btamail.net.cn" -->
+<BINFO>
+	<BIP>
+	</BIP>
+	<BIO>
+	</BIO>
+	<CODE_STRU>
+		<CODE_FIELD index="1" name="cd_id"           c_name="代码"   type="varchar" width="?"  p_key="yes"/>
+		<CODE_FIELD index="2" name="cd_name"         c_name="名称"   type="varchar" width="64" p_key="no" />
+		<CODE_FIELD index="3" name="cd_availability" c_name="可用性" type="varchar" width="1"  p_key="no" />
+		<CODE_FIELD index="4" name="cd_index"        c_name="索引"   type="int"     width="0"  p_key="no" />
+	</CODE_STRU>
+	<CODE_LIST>
+		<CODE t_name="cdg_sex"               c_len="1"  c_name="性别"             s_type="GB"   s_name="GB 2261-80"      s_year="1980" comment="" />
+		<CODE t_name="cdg_nation"            c_len="2"  c_name="民族"             s_type="GB"   s_name="GB 3304-1991"    s_year="1991" comment="" />
+		<CODE t_name="cdg_eyesight"          c_len="4"  c_name="视力"             s_type="GB"   s_name="GB 11533-89"     s_year="1989" comment="" />
+		<CODE t_name="cdg_healthstate"       c_len="1"  c_name="健康状况"         s_type="GB"   s_name="GB 4767-84"      s_year="1984" comment="" />
+		<CODE t_name="cdg_deformity"         c_len="2"  c_name="残疾情况"         s_type="GB"   s_name="GB 4767-84"      s_year="1984" comment="" />
+		<CODE t_name="cdg_parentage"         c_len="2"  c_name="家庭出身"         s_type="GB"   s_name="GB 4765-1984"    s_year="1984" comment="" />
+		<CODE t_name="cdg_educationallevel"  c_len="2"  c_name="文化程度"         s_type="GB"   s_name="GB 4658-1984"    s_year="1984" comment="" />
+		<CODE t_name="cdg_politicsaspect"    c_len="2"  c_name="政治面貌"         s_type="GB"   s_name="GB 4762-1984"    s_year="1984" comment="" />
+		<CODE t_name="cdg_marriage"          c_len="1"  c_name="婚姻状况"         s_type="GB"   s_name="GB 4766-84"      s_year="1984" comment="" />
+		<CODE t_name="cdg_dutygrade"         c_len="2"  c_name="职务级别"         s_type="GB"   s_name="GB 12407-1990"   s_year="1990" comment="" />
+		<CODE t_name="cdg_duty"              c_len="4"  c_name="职务"             s_type="GB"   s_name="GB 12403-1990"   s_year="1990" comment="" />
+		<CODE t_name="cdg_industry"          c_len="5"  c_name="行业"             s_type="GB/T" s_name="GB/T 4754-2002"  s_year="2002" comment="" />
+		<CODE t_name="cdg_regtype"           c_len="3"  c_name="注册类型"         s_type="GB/T" s_name="GB/T 12402-2000" s_year="2000" comment="" />
+		<CODE t_name="cdg_subjection"        c_len="3"  c_name="隶属关系"         s_type="GB/T" s_name="GB/T 12404-1997" s_year="1997" comment="" />
+		<CODE t_name="cdg_nationality"       c_len="3"  c_name="国籍"             s_type="GB/T" s_name="GB/T 2659-2000"  s_year="2000" comment="" />
+		<CODE t_name="cdg_regioncode"        c_len="12" c_name="行政区划"         s_type="GB/T" s_name="GB/T 2260-2002"  s_year="2002" comment="" />
+		<CODE t_name="cdg_technicalposition" c_len="3"  c_name="职称"             s_type="GB/T" s_name="GB/T 8561-2001"  s_year="2001" comment="" />
+		<CODE t_name="cdg_businesstype"      c_len="1"  c_name="业态"             s_type="GB/T" s_name="LB 501-2002"     s_year="2002" comment="" />
+		<CODE t_name="cdg_language"          c_len="2"  c_name="语种"             s_type="GB"   s_name="LB AAC015"       s_year="2005" comment="" />
+		<CODE t_name="cdl_proficiency"       c_len="1"  c_name="熟练程度"         s_type="LB"   s_name="LB AAC027"       s_year="2005" comment="" />
+		<CODE t_name="cdl_specialty"         c_len="7"  c_name="职业（工种）"     s_type="LB"   s_name="LB 501-2002"     s_year="2002" comment="" />
+		<CODE t_name="cdl_qualification"     c_len="3"  c_name="国家职业资格等级" s_type="LB"   s_name="LB AAC015"       s_year="2005" comment="" />
+		<CODE t_name="cdl_bloodtype"         c_len="1"  c_name="血型类型"         s_type="LB"   s_name="LB AAC032"       s_year="2005" comment="" />
+		<CODE t_name="cdl_rprtype"           c_len="2"  c_name="户籍类型"         s_type="LB"   s_name="LB AAC009"       s_year="2005" comment="" />
+		<CODE t_name="cdl_personneltype"     c_len="3"  c_name="人员类别"         s_type="LB"   s_name="LB AAC027"       s_year="2005" comment="" />
+		<CODE t_name="cdl_ssstatus"          c_len="3"  c_name="社会保险状态"     s_type="LB"   s_name="LB AAC008"       s_year="2005" comment="" />
+		<CODE t_name="cdl_employtype"        c_len="3"  c_name="用工形式"         s_type="LB"   s_name="LB AAC013"       s_year="2005" comment="" />
+		<CODE t_name="cdl_specialwork"       c_len="3"  c_name="特殊工种标识"     s_type="LB"   s_name="LB AAC019"       s_year="2005" comment="" />
+		<CODE t_name="cdl_empstatus"         c_len="3"  c_name="就业状态"         s_type="LB"   s_name="LB AAC016"       s_year="2005" comment="" />
+		<CODE t_name="cdl_emphardness"       c_len="3"  c_name="就业困难人员"     s_type="LB"   s_name="LB AAC029"       s_year="2005" comment="" />
+		<CODE t_name="cdl_orgtype"           c_len="2"  c_name="单位性质"         s_type="LB"   s_name="LB AAB019"       s_year="2005" comment="" />
+		<CODE t_name="cdl_domain"            c_len="1"  c_name="产业"             s_type="LB"   s_name="LB AAB054"       s_year="2005" comment="" />
+		<CODE t_name="cdl_businessmanner"    c_len="2"  c_name="经营方式"         s_type="SX"   s_name="SX 2005.1"       s_year="2005" comment="" />
+		<CODE t_name="cdx_religion"          c_len="2"  c_name="宗教信仰"         s_type="SX"   s_name="SX 2005.1"       s_year="2005" comment="" />
+		<CODE t_name="cdx_certype"           c_len="2"  c_name="证书类型"         s_type="SX"   s_name="SX 2005.1"       s_year="2005" comment="" />
+		<CODE t_name="cdx_skilltype"         c_len="2"  c_name="技能类别"         s_type="SX"   s_name="SX 2005.1"       s_year="2005" comment="" />
+		<CODE t_name="cdx_computergrade"     c_len="1"  c_name="计算机等级"       s_type="SX"   s_name="SX 2005.1"       s_year="2005" comment="" />
+		<CODE t_name="cdx_scale"             c_len="2"  c_name="单位规模"         s_type="SX"   s_name="SX 2005.1"       s_year="2005" comment="" />
+		<CODE t_name="cdx_accountanttype"    c_len="1"  c_name="会计制度"         s_type="SX"   s_name="SX 2005.1"       s_year="2005" comment="" />
+		<CODE t_name="cdx_regdept"           c_len="1"  c_name="登记注册部门"     s_type="SX"   s_name="SX 2005.1"       s_year="2005" comment="" />
+		<CODE t_name="cdx_owner"             c_len="1"  c_name="控股情况"         s_type="SX"   s_name="SX 2005.1"       s_year="2005" comment="" />
+		<CODE t_name="cdx_cstqualification"  c_len="1"  c_name="建筑业资质"       s_type="SX"   s_name="SX 2005.1"       s_year="2005" comment="" />
+		<CODE t_name="cdx_husqualification"  c_len="1"  c_name="房地产开发业资质" s_type="SX"   s_name="SX 2005.1"       s_year="2005" comment="" />
+		<CODE t_name="cdx_cptqualification"  c_len="4"  c_name="系统集成资质"     s_type="SX"   s_name="SX 2005.1"       s_year="2005" comment="" />
+		<CODE t_name="cdx_ifrelation"        c_len="1"  c_name="判断关系表"      s_type="SX"   s_name="SX 2005.1"       s_year="2005" 
+		comment="" />
+		<CODE t_name="cdx_ifrelation1"        c_len="1"  c_name="判断关系表"      s_type="SX"   s_name="SX 2005.1"       s_year="2005" 
+		comment="" />
+	</CODE_LIST>
+	<CODE_INIT_DATA_FILE>代码数据.xls</CODE_INIT_DATA_FILE>
+</BINFO>

@@ -1,0 +1,122 @@
+# 这是一个aaa文件, 在你的项目上使用前可能需要编辑.
+---
+# 通过 Apache Maven (http://maven.apache.org) 构建 JAVA 程序
+# 关于docker 镜像标签 请看 https://hub.docker.com/_/maven/
+#
+# 对于一般生命周期信息 请看  https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
+#
+# 这个模板会生成和测试你的项目以及创建文档
+#
+# * 缓存下载的依赖和调用之间的插件。
+# * 只验证合并请求 but deploy built artifacts of the
+#   master branch.
+# * 演示如何在测试阶段中使用多个工作以验证功能性
+#   多版本  JDKs.
+# * 使用站点：阶段收集多模块项目的文档。
+# * 发布“master”分支的文档。
+
+
+variables:
+  # 这将抑制任何下载或上传的依赖和插件将杂波的控制台日志消息。
+  # `showDateTime` 将显示过去的时间以毫秒为单位。你需要指定 `--batch-mode` 来做这项工作。
+  MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+  # 作为Maven 3.3.0代替本可以在`定义这些选项。 `.mvn/maven.config` 所以相同的配置使用
+  # 当从命令行运行时。
+  # `installAtEnd` 和 `deployAtEnd`只是有效的与最近版本的相应的插件。
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+  SONAR_URL: https://130.10.8.207/sonarqube
+
+# 缓存下载的依赖和建立之间的插件。
+cache:
+  paths:
+    - /root/.m2/repository/
+
+# 这将只验证和编译的东西，并运行例如  maven-enforcer-plugin.
+# 因为一些强制规则可能检查依赖收敛和类重复
+# we use `test-compile` here instead of `validate`, so the correct classpath is picked up.
+.validate: &validate
+  stage: build
+  script:
+    - 'mvn $MAVEN_CLI_OPTS test-compile'
+  tags:
+    - java
+
+
+
+sonarqube_preview:
+  image: 130.10.8.208:8889/maven:3.3.9-jdk-8
+  script:
+    #- git checkout origin/master
+    #- git merge $CI_COMMIT_SHA --no-commit --no-ff
+    - mvn --batch-mode verify sonar:sonar -Dsonar.gitlab.max_blocker_issues_gate=-1 -Dsonar.gitlab.max_critical_issues_gate=-1  -Dsonar.analysis.mode=preview -Dsonar.gitlab.project_id=$CI_PROJECT_PATH -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.ref_name=$CI_BUILD_REF_NAME
+  stage: test
+  except:
+    - dev
+    - master
+    - /^hotfix_.*$/
+    - /.*-hotfix$/
+  tags:
+    - java
+
+sonarqube:
+  image: 130.10.8.208:8889/maven:3.3.9-jdk-8
+  script:
+    - mvn --batch-mode verify sonar:sonar
+  stage: test
+  only:
+    - master
+  tags:
+    - java
+
+
+
+# 对于合并请求不 `deploy` 但只运行  `verify`.
+# See https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
+.verify: &verify
+  stage: test
+  script:
+    - 'mvn $MAVEN_CLI_OPTS verify'
+  except:
+    - master
+  tags:
+        - java
+
+# 使用的合并请求验证  JDK7
+# validate:jdk7:
+#  <<: *validate
+#  image: 130.10.8.208:8889/maven:3.3.9-jdk-7
+
+# 使用的合并请求验证 JDK8
+validate:jdk8:
+  <<: *validate
+  image: 130.10.8.208:8889/maven:3.3.9-jdk-8
+
+# 使用的合并请求验证  JDK7
+# verify:jdk7:
+#  <<: *verify
+#  image: 130.10.8.208:8889/maven:3.3.9-jdk-7
+
+# 使用的合并请求验证  JDK8
+verify:jdk8:
+  <<: *verify
+  image: 130.10.8.208:8889/maven:3.3.9-jdk-8
+
+
+# For `master` branch run `mvn deploy` automatically.
+# 在这里你需要决定你是否想使用  JDK7 or 8.
+# 为了得到这个工作，您需要定义一个卷，同时配置您的  gitlab-ci-multi-runner.
+# 加载你的 `settings.xml` 到 `/root/.m2/settings.xml` 持有你的密钥.
+# 详情看 https://maven.apache.org/settings.html
+deploy:jdk8:
+  # 在这里使用阶段测试，所以网页的工作可能会在稍后的拾取所创建的站点。
+  stage: test
+  script:
+    - 'mvn $MAVEN_CLI_OPTS deploy'
+  only:
+    - master
+  image: 130.10.8.208:8889/maven:3.3.9-jdk-8
+  tags:
+      - java
+
+
+

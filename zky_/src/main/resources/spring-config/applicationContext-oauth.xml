@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   default-lazy-init="true"
+	xsi:schemaLocation="
+ http://www.springframework.org/schema/beans
+
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="quartzClock" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="durability" value="true"></property>
+		<property name="jobClass">
+			<value>com.sx.tokenservice.AccessTokenService</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="scope" value="bksx,zpfw" />
+				<!--申请token时的作用域-->
+			</map>
+		</property>
+	</bean>
+	<!-- 第二步 调度定时任务 -->
+	<!--这种配置与第一种方法效果一样 -->
+	<bean id="quartzClockTask" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="quartzClock" />
+		</property>
+		<property name="startDelay"><!-- 这里是服务启动后延时多少时间,开始计时任务,单位ms -->
+			<value>6000</value>
+		</property>
+		<property name="repeatInterval"><!-- 这里是每隔多长时间就进行一次计时任务,单位ms -->
+			<value>7200000</value>
+		</property>
+	</bean>
+	<bean id="schedulerFactoryBean"
+		  class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="quartzClockTask"></ref>
+			</list>
+		</property>
+	</bean>
+</beans>

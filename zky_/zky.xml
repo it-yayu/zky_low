@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- config file for database connection pools, written by YangXiPing "yangxiping@btamail.net.cn" -->
+<DBCPOOLS>
+
+    <DSN name="MYSQL"
+         dbms="mysql"
+         driver="com.mysql.jdbc.Driver"
+         url="jdbc:mysql://localhost:3306/zky?useUnicode=true&amp;characterEncoding=UTF-8"
+         uid="root"
+         pwd="root"
+         minconnections="2"
+         maxconnections="20"
+         timeout="300"
+         timewait="1000"
+         ctl_wait="3"
+         mon_wait="3"
+         idle_proc="true"
+         idle_minutes="10"
+         logcfg_file="logxcfg.xml"
+         logcfg_name="logxcfg"
+         comment="for zky"
+    />
+</DBCPOOLS>

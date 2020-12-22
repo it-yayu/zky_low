@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task.xsd
+		">
+    <import resource="classpath:spring-config/**/applicationContext*.xml"/>
+    <!-- 配置定时任务开始 -->
+    <task:annotation-driven/>
+    <context:annotation-config/>
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+    <!-- 配置扫描包路径 -->
+    <!-- 配置定时任务结束-->
+    <context:component-scan base-package="com.sx">
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!-- 启用替换参数占位符功能，并且进行扩展，可以在spring管理bean中使用@PropertyConfig引入参数 -->
+    <bean id="propertyConfigurer" class="com.sx.spring.exetend.ExtendedPropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <!-- 标准配置 -->
+                <value>classpath:env.properties</value>
+            </list>
+        </property>
+    </bean>
+    <!-- 定义事务拦截器  事务处理-->
+
+    <bean id="dbInterceptor"
+          class="com.sx.db.DbInterceptor">
+        <property name="methodList">
+            <list>
+                <value>*Save</value>
+            </list>
+        </property>
+        <property name="rollback_for">
+            <list>
+                <value>Exception</value>
+            </list>
+        </property>
+
+        <property name="exludeMethodList">
+            <list>
+                <value>temp*</value>
+            </list>
+        </property>
+    </bean>
+    <!-- 自动生成代理 -->
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames">
+            <list>
+                <value>*Service</value>
+                <!--为APPLogDAO记录日志，释放连接做的配置，不然可能无法释放链接-->
+                <value>appLogDAO</value>
+            </list>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>dbInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+
+</beans>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sx-config>
+    <!-- 文件上传的配置信息 -->
+    <upload-config type="com.sx.conf.UploadConfig">
+        <!-- 文件上传的最大限制(k) -->
+        <file-maxsize>102400</file-maxsize>
+        <!-- 读取到内存中最大限制(k) -->
+        <load-maxsize>4096</load-maxsize>
+        <!-- 文件如果超出内存读取的最大限制，要产生临时文件，临时文件的存放目录 -->
+        <temp-path>sysfiles</temp-path>
+        <!-- 文件上传到服务器端目录，此配置为兼容以前版本配置 -->
+        <file-path>sysfiles</file-path>
+        <!-- 文件上传到服务器端目录，绝对路径 -->
+        <file-absolute-path>D:\upload</file-absolute-path>
+    </upload-config>
+    <upload-modular-config type="com.sx.conf.UploadModularConfig">
+        <item>
+            <!-- 模块名称 -->
+            <modename>testmode</modename>
+            <!-- 允许上传文件类型 -->
+            <allowfiletype>zip,mp3,jpg;gif</allowfiletype>
+            <!-- 不允许上传文件类型 -->
+            <exludefiletype>exe</exludefiletype>
+            <!-- 最大文件大小 -->
+            <maxfilesize>10000000</maxfilesize>
+        </item>
+        <item>
+            <modename>testmode1</modename>
+            <allowfiletype>mp3</allowfiletype>
+            <exludefiletype></exludefiletype>
+            <maxfilesize>10000000</maxfilesize>
+        </item>
+    </upload-modular-config>
+    <!-- dba的配置信息         old -->
+    <dba-config type="com.sx.conf.DbaConfig">
+        <dbs></dbs>
+        <cfgfile>zky.xml</cfgfile>
+        <driver>com.mysql.jdbc.Driver</driver>
+    </dba-config>
+    <!-- 多数据源配置信息 -->
+    <multi-db-config type="com.sx.conf.MultiDbConfig">
+        <item>
+            <dbs>MYSQL</dbs>
+            <cfgfile>zky.xml</cfgfile>
+            <driver>com.mysql.jdbc.Driver</driver>
+            <default>true</default>
+        </item>
+    </multi-db-config>
+    <!-- 数据库操作事件配置信息 -->
+    <db-event type="com.sx.conf.DbEventConfig">
+        <enable>true</enable>
+        <isasync>true</isasync>
+        <!-- database name configured in multi-db-config -->
+        <savedbs>MYSQL</savedbs>
+        <!-- package info split with ; or , -->
+        <packages>com.sx.demo</packages>
+        <defaultListener>
+            <className>com.sx.dbevent.SqlSaveListener</className>
+        </defaultListener>
+    </db-event>
+
+    <!-- rbac的配置信息 rbacforoauth-->
+    <rbac-config type="com.sx.conf.RbacConfig">
+        <rbacurl>${rbacurl}</rbacurl>
+        <rbactype>${rbactype}</rbactype><!-- rbac,rbacforoauth,rbacforlocal,pfpmi -->
+    </rbac-config>
+
+    <rbac-oauth-config type="com.sx.support.rbac.conf.OAuthClientConfig">
+        <client_id>${client_id}</client_id>
+        <client_secret>${client_secret}</client_secret>
+    </rbac-oauth-config>
+    <!-- Rbac配置结束的 -->
+
+    <!-- 日志的配置信息 -->
+    <log-config type="com.sx.conf.LogConfig">
+        <logxcfg>logxcfg.xml</logxcfg>
+        <app>zky</app>
+        <debug>true</debug>
+    </log-config>
+
+    <!-- app的配置信息 分页 -->
+    <app-config type="com.sx.conf.AppConfig">
+        <appcontext>/${final-name}</appcontext>
+        <pagecountbyh>12</pagecountbyh>
+        <pagecountbyv>5</pagecountbyv>
+        <!--登录密码的盐-->
+        <pwd_salt>szdagl</pwd_salt>
+    </app-config>
+
+</sx-config>

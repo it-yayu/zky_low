@@ -1,0 +1,167 @@
+﻿/*
+css中修改：
+当前页按钮颜色#4cb3f0 
+鼠标划按钮颜色#dcf2ff
+确认按钮颜色#4cb3f0
+
+在kkpager.js 和 kkpager.min.js里修改：
+页码输入框边框颜色#4cb3f0
+ */
+
+.divpage{
+	clear:both;
+	line-height:30px;
+	margin-top:20px;
+	color:#999999;
+	font-size:14px;
+    text-align:center;
+    height:50px;
+}
+.divpage a{
+	padding:4px 8px;
+	margin:10px 3px;
+	font-size:12px;
+	border:1px solid #DFDFDF;
+	background-color:#FFF;
+	color:#9d9d9d;
+	text-decoration:none;
+}
+.divpage span{
+	font-size:14px;
+}
+.divpage span.disabled{
+	padding:4px 8px;
+	margin:10px 3px;
+	font-size:12px;
+	border:1px solid #DFDFDF;
+	background-color:#FFF;
+	color:#DFDFDF;
+}
+.divpage span.curr{
+	padding:4px 8px;
+	margin:10px 3px;
+	font-size:12px;
+	border:1px solid #4cb3f0;
+	background-color:#4cb3f0;
+	color:#FFF;
+}
+.divpage a:hover{
+	background-color:#dcf2ff;
+	border:1px solid #4cb3f0;
+}
+.divpage span.normalsize{
+	font-size:12px;
+}
+.divpage_gopage_wrap{
+	display:inline-block;
+	width:44px;
+	height:18px;
+	border:1px solid #DFDFDF;
+	margin:0px 1px;
+	padding:0px;
+	position:relative;
+	left:0px;
+	top:5px;
+}
+.divpage_btn_go {
+	width:44px;
+	height:20px;
+	line-height:20px;
+	padding:0px;
+	font-family:arial,宋体,sans-serif;
+	text-align:center;
+	border:0px;
+	background-color:#4cb3f0;
+	color:#FFF;
+	position:absolute;
+	left:0px;
+	top:-1px;
+	display:none;
+}
+.divpage_btn_go_input{
+	width:42px;
+	height:16px;
+	text-align:center;
+	border:0px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	outline:none;
+    padding:0px 0px;
+}
+
+.loadingmask {
+    z-index: 100;
+    position: absolute;
+    top:0;
+    left:0;
+    -moz-opacity: 0.5;
+    opacity: .50;
+    filter: alpha(opacity=0);
+    background-color: #CCC;
+    width: 100%;
+    height: 100%;
+    zoom: 1;
+}
+.loadingmask-msg {
+    z-index: 20001;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.loadingmask-msg div {
+    padding:5px 10px 5px 25px;
+    background: #fbfbfb url('../images/load/loading.gif') no-repeat 5px 5px;
+    line-height: 16px;
+    border:1px solid #a3bad9;
+    font:normal 11px tahoma, arial, helvetica, sans-serif;
+    cursor:wait;
+}
+.loadmasked {
+    overflow: hidden !important;
+}
+.loadmasked-relative {
+    position: relative !important;
+}
+.loadmasked-hidden {
+    visibility: hidden !important;
+}
+
+.more_div{
+	clear:both;
+	color:#999999;
+	font-size:14px;
+    text-align:center;
+}
+
+.more_enabled{
+	padding:4px 8px;
+	margin:10px 3px;
+	font-size:12px;
+    line-height:30px;
+	border:1px solid #DFDFDF;
+	background-color:#FFF;
+	color:#9d9d9d;
+	text-decoration:none;
+	width:100%;
+}
+
+.more_enabled:hover{
+	background-color:#dcf2ff;
+	border:1px solid #4cb3f0;
+}
+
+.more_disabled{
+	padding:4px 8px;
+	margin:10px 3px;
+	font-size:12px;
+    line-height:30px;
+	border:1px solid #DFDFDF;
+	background-color:#FFF;
+	color:#DFDFDF;
+	width:100%;
+}
+
+.more_loading{
+    background: url('../images/load/loading.gif') no-repeat;
+}
